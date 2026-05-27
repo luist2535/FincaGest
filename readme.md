@@ -79,20 +79,46 @@ En la UI: abre la sección `Inmuebles` y usa el formulario correspondiente para 
 - Si aparece el diálogo de error al arrancar, revisa que MySQL esté en `localhost:3306`, que la base `fincas_db` exista y que las credenciales en `DatabaseConnection` sean correctas.
 - Ejecuta `mvn clean install` si las dependencias no se descargaron correctamente.
 
-## Subir a GitHub
-Para subir el repositorio local al remoto `https://github.com/luist2535/FincaGest.git`:
+## Descripción por pestaña (qué hace cada sección)
 
-```bash
-git remote add origin https://github.com/luist2535/FincaGest.git
-git branch -M main
-git push -u origin main
-```
+Las siguientes descripciones explican la funcionalidad principal de cada panel accesible desde la barra lateral (sidebar) y cómo añadir/editar registros desde la UI o por código.
 
-Si tu remoto necesita autenticación, usa un token personal (PAT) para HTTPS o configura clave SSH.
+- **Dashboard**
+   - Qué hace: Muestra un resumen general del sistema: totales de inmuebles, contratos activos, saldo bancario y atajos a acciones frecuentes.
+   - Cómo usar: Consulta los indicadores principales. Usa los botones/atajos del panel para navegar a las secciones detalladas.
+
+- **Inmuebles**
+   - Qué hace: Lista todos los inmuebles registrados (edificios, pisos, locales) y muestra información básica (dirección, tipo, planta, letra, código de recibo).
+   - Acciones comunes: buscar, filtrar, ordenar; añadir nuevo inmueble; editar o eliminar inmuebles existentes.
+   - Cómo añadir: en la UI, pulsa el botón `Añadir` (o `Nuevo`) dentro del panel `Inmuebles`, completa el formulario y guarda. Los cambios se persistirán en la base de datos mediante `InmuebleDAO.insert()`.
+   - Cómo agregar por código: usa `Inmueble` + `InmuebleDAO.insert(...)` (ver ejemplo en la sección "Cómo agregar un Inmueble").
+
+- **Inquilinos**
+   - Qué hace: Muestra la lista de inquilinos con sus datos de contacto y contratos asociados.
+   - Acciones comunes: crear/editar/eliminar inquilinos, asignar un contrato de alquiler a un inmueble.
+   - Cómo añadir: usa el botón `Nuevo` dentro del panel `Inquilinos` y completa el formulario.
+
+- **Alquileres**
+   - Qué hace: Gestiona los contratos de alquiler: contratos activos, fechas inicio/fin, importe, inquilino e inmueble relacionados.
+   - Acciones comunes: crear nuevo contrato, renovar, finalizar contrato, marcar como activo/inactivo.
+   - Cómo añadir: desde el panel `Alquileres` pulsa `Nuevo contrato`, selecciona inquilino e inmueble (se cargan desde `InquilinoDAO` e `InmuebleDAO`) y guarda.
+
+- **Recibos**
+   - Qué hace: Genera y lista recibos asociados a los alquileres y movimientos de pago. Permite visualizar detalles y marcar recibos como pagados.
+   - Acciones comunes: emitir recibo, marcar pago, imprimir/exportar recibo.
+
+- **Contabilidad**
+   - Qué hace: Muestra movimientos bancarios y resumen contable relacionado con cobros y pagos.
+   - Acciones comunes: registrar movimientos bancarios, conciliar pagos con recibos, ver balances por período.
+
+- **Informes**
+   - Qué hace: Genera listados e informes (por ejemplo, inmuebles disponibles, contratos próximos a vencer, ingresos por período).
+   - Acciones comunes: seleccionar filtros (fecha, inmueble, inquilino) y exportar listados.
+
+Nota: la interfaz concreta (etiquetas de botones, nombres) puede variar según la versión; los paneles usan métodos `refreshData()` que recargan la información desde la base de datos al navegar entre secciones.
 
 ## Siguientes pasos que puedo hacer por ti
 - Actualizar `DatabaseConnection` para leer credenciales desde variables de entorno.
-- Ejecutar los comandos Git y hacer push al remoto (necesitaré que confirmes o que autorices el acceso).
 - Añadir `LICENSE` y `CONTRIBUTING.md` si quieres publicar el proyecto.
 
-¿Qué prefieres que haga ahora?
+¿Quieres que adapte el README con capturas de pantalla de cada panel o que modifique `DatabaseConnection` para usar variables de entorno ahora?
