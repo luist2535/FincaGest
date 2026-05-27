@@ -117,8 +117,3 @@ Las siguientes descripciones explican la funcionalidad principal de cada panel a
 
 Nota: la interfaz concreta (etiquetas de botones, nombres) puede variar según la versión; los paneles usan métodos `refreshData()` que recargan la información desde la base de datos al navegar entre secciones.
 
-## Siguientes pasos que puedo hacer por ti
-- Actualizar `DatabaseConnection` para leer credenciales desde variables de entorno.
-- Añadir `LICENSE` y `CONTRIBUTING.md` si quieres publicar el proyecto.
-
-¿Quieres que adapte el README con capturas de pantalla de cada panel o que modifique `DatabaseConnection` para usar variables de entorno ahora?
